@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WNC MENACERA</title>
+<style>
+:root{--gold:#f2c66d;--glow:#4fd1ff}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:radial-gradient(ellipse at 50% 0%,#1c3b63,#0d1b2e 40%,#050a14);color:#f4f7fb;font-family:"Segoe UI",Tahoma,Arial,sans-serif;display:flex;justify-content:center;min-height:100vh;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.app{width:100%;max-width:440px;padding:24px 18px 40px}
+h1{margin:6px 0 22px;font-size:28px;font-weight:800;letter-spacing:.14em;text-align:center;direction:ltr;background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:135px;margin-bottom:26px;border-radius:26px;position:relative;background:linear-gradient(160deg,#2b4f80,#173257 55%,#0f2140);border:1px solid #ffffff2e;box-shadow:0 0 22px #4fd1ff40,0 12px 0 #0a1830,0 22px 30px #0009,inset 0 2px 0 #ffffff47,inset 0 -8px 16px #0006;transform:perspective(700px) rotateX(6deg);transition:transform .12s,box-shadow .12s}
+.btn:active{transform:perspective(700px) rotateX(6deg) translateY(9px);box-shadow:0 0 14px #4fd1ff40,0 3px 0 #0a1830,0 8px 14px #0009,inset 0 2px 0 #fff3,inset 0 -8px 16px #0006}
+.btn:focus-visible,.chip:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.ico{font-size:46px;line-height:1}.lbl{font-size:18px;font-weight:700;letter-spacing:.08em;direction:ltr}.cnt{font-size:13px;opacity:.75}
+.btn.small{height:64px;flex-direction:row;font-size:15px;margin-top:-6px;background:linear-gradient(160deg,#3a3f4a,#20242d)}
+.top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.back{all:unset;cursor:pointer;background:#ffffff1a;border-radius:12px;padding:8px 14px;font-size:14px}
+.top h2{margin:0;font-size:19px;direction:ltr}
+input.s{width:100%;padding:12px 14px;border-radius:14px;border:1px solid #ffffff2e;background:#0b1526;color:#fff;font-size:15px;margin-bottom:14px}
+.card{background:linear-gradient(160deg,#1b3455,#101f39);border:1px solid #ffffff22;border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 8px 18px #0006}
+.nm{font-weight:700;font-size:17px;direction:ltr;text-align:left}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px;font-size:14px}
+.row span:first-child{opacity:.65;font-size:12px}
+.v{direction:ltr;font-family:Consolas,monospace;word-break:break-all}
+button.mini{all:unset;cursor:pointer;background:#ffffff1a;border-radius:9px;padding:5px 10px;font-size:12px}
+select{background:#0b1526;color:#fff;border:1px solid #ffffff2e;border-radius:9px;padding:5px;font-size:12px}
+a{color:var(--glow);text-decoration:none}
+.mh{margin:18px 4px 8px;font-size:15px;font-weight:700;color:var(--gold);display:flex;justify-content:space-between}.mh span{opacity:.6;font-weight:400;font-size:12px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;margin-bottom:4px}.chip{all:unset;cursor:pointer;flex-shrink:0;background:#ffffff14;border-radius:14px;padding:6px 12px;font-size:13px}.chip.on{background:var(--gold);color:#1a1a1a;font-weight:700}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.f{display:block;margin-top:8px;font-size:12px;opacity:.9}.f input{display:block;width:100%;margin-top:3px;padding:9px 10px;border-radius:10px;border:1px solid #ffffff33;background:#0b1526;color:#fff;font-size:14px}
+.acts{display:flex;gap:8px;margin-top:12px}.acts .mini{padding:8px 14px;font-size:13px}.acts .ok{background:var(--gold);color:#1a1a1a;font-weight:700}
+.empty{text-align:center;opacity:.6;padding:30px 0}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#000c;padding:9px 16px;border-radius:12px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}.toast.on{opacity:1}
+.hb{display:flex;gap:6px;align-items:center}button.sc{all:unset;cursor:pointer;background:#ffffff1a;border-radius:9px;padding:5px 8px;display:flex;color:#ff8a80}.ov{position:fixed;inset:0;background:#000d;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px}.ov img{max-width:100%;max-height:72vh;border-radius:12px;background:#fff}.ov .acts{margin:0}
+.alarm{display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(160deg,#f2c66d,#e0a53a);color:#1a1a1a;border-radius:18px;padding:12px 14px;margin-bottom:18px;font-weight:700;font-size:15px;animation:pl 1s infinite alternate}.alarm button{all:unset;cursor:pointer;background:#1a1a1a;color:#f2c66d;border-radius:10px;padding:8px 14px;font-size:13px}@keyframes pl{to{box-shadow:0 0 22px #f2c66d}}.nx{display:flex;justify-content:space-between;align-items:center;font-size:12px;opacity:.85;margin:-10px 4px 16px}.nx button{all:unset;cursor:pointer;background:#ffffff1a;border-radius:9px;padding:4px 10px}
+.fm{max-width:380px;width:100%;max-height:88vh;overflow:auto}.fm h3{margin:0 0 8px;font-size:17px}.fm select{all:unset;background:#ffffff1a;border-radius:9px;padding:8px 10px;font-size:14px;width:100%;box-sizing:border-box}.fm option{color:#000}
+@media (prefers-reduced-motion:reduce){.alarm{animation:none}}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+<main class="app" id="app"></main>
+<div class="toast" id="t"></div>
+<script>
+var DATA=[{"id": "Feuil9:3", "ns": "1390791521007", "nom": "ABBAR", "pre": "MOHAMMED", "date": "25/08/*****", "mdp": "mohammedA12@", "ref": "Lui Même", "tel": "0555-26-45-36", "sec": ""}, {"id": "Feuil1:7", "ns": "2450199357041", "nom": "ABBAR", "pre": "OURDIA", "date": "25/01/*****", "mdp": "ourdiaA12@", "ref": "HOCINE", "tel": "0771-10-53-21", "sec": "ASSURANCE"}, {"id": "Feuil4:1", "ns": "2480191901976", "nom": "ABDI", "pre": "FATMA", "date": "25/04/****", "mdp": "actionteleA147", "ref": "MOHMMED", "tel": "0791-66-96-24", "sec": ""}, {"id": "Feuil8:1", "ns": "1430491521017", "nom": "ABDI", "pre": "SAID", "date": "25/08/*****", "mdp": "actionteleA121", "ref": "Lui Même", "tel": "0556.92.41.57", "sec": ""}, {"id": "Feuil7:4", "ns": "1460999352280", "nom": "AMMOUCHE", "pre": "AHCENE", "date": "25/07/*****", "mdp": "actionteleA78", "ref": "Lui Meme", "tel": "0698.26.89.28", "sec": ""}, {"id": "Feuil1:8", "ns": "2461091900776", "nom": "AMMOUCHE", "pre": "OURDIA", "date": "25/01/*****", "mdp": "France@2020", "ref": "AHMED", "tel": "0552-65-14-34", "sec": "INFO RETRAITE"}, {"id": "TOUS:6", "ns": "1350291521013", "nom": "AMMOUCHE", "pre": "RABAH", "date": "25/02/****", "mdp": "actionteleA258", "ref": "AHMED", "tel": "0552.55.95.54", "sec": ""}, {"id": "Feuil12:3", "ns": "2240199353226", "nom": "AMOUCHE", "pre": "AHCENE", "date": "25/12/*****", "mdp": "actionteleA26", "ref": "La Mère", "tel": "0698.26.89.28", "sec": ""}, {"id": "Feuil2:4", "ns": "2320599354339", "nom": "AMZIANE", "pre": "FATIMA", "date": "25/09/*****", "mdp": "actiontele12.AB", "ref": "HAMID", "tel": "0771.39.80.33", "sec": ""}, {"id": "Feuil10:3", "ns": "2320599354339", "nom": "AMZIANE", "pre": "FATIMA", "date": "25/09/*****", "mdp": "actiontele12.AB", "ref": "HAMID AMZIANE", "tel": "0771.39.80.33", "sec": ""}, {"id": "Feuil7:0", "ns": "1421091521003", "nom": "AROUS", "pre": "SAID", "date": "25/07/*****", "mdp": "actiontele12.AZ", "ref": "Lui Même", "tel": "0559.72.82.43", "sec": ""}, {"id": "Feuil2:2", "ns": "2560191900337", "nom": "AZOUT", "pre": "TASSADIT", "date": "25/01/*****", "mdp": "Cyber19560102", "ref": "MOULOUD", "tel": "0550-87-20-17", "sec": ""}, {"id": "Feuil5:1", "ns": "2370999354699", "nom": "BARKANE", "pre": "RACHID", "date": "25/05/*****", "mdp": "actionteleA5110", "ref": "RACHID", "tel": "0549-41-92-63", "sec": ""}, {"id": "Feuil6:1", "ns": "1481099354601", "nom": "BELAHCEL", "pre": "MOHAMMED", "date": "25/06/*****", "mdp": "actionteleA356", "ref": "MOHAMMED", "tel": "0559-04-94-44", "sec": ""}, {"id": "Feuil10:4", "ns": "2570592900308", "nom": "BELAHCEL", "pre": "TASSADIT", "date": "25/09/*****", "mdp": "Alilouche2021", "ref": "Mokrane", "tel": "0540-95-61-78", "sec": ""}, {"id": "Feuil1:6", "ns": "2410391900485", "nom": "BILEM", "pre": "TASSADIT", "date": "25/01/*****", "mdp": "France@2020", "ref": "SMAIL", "tel": "", "sec": ""}, {"id": "Feuil11:1", "ns": "1470699352333", "nom": "BOURIF", "pre": "BOUSSAD", "date": "25/11/*****", "mdp": "actionteleA852", "ref": "SAID", "tel": "0553-53-37-42", "sec": ""}, {"id": "Feuil1:5", "ns": "2541091900897", "nom": "BOUZID", "pre": "DJOUHAR", "date": "25/01/*****", "mdp": "lounesA12@", "ref": "LOUNES", "tel": "0663-72-92-02", "sec": "ASSURANCE"}, {"id": "Feuil3:1", "ns": "1460291521005", "nom": "BOUZID", "pre": "SAID", "date": "25/03/****", "mdp": "actionteleA12@", "ref": "jojo", "tel": "0778-53-59-55", "sec": ""}, {"id": "Feuil12:4", "ns": "1301191521011", "nom": "CHABOUNI", "pre": "MOHAMMED", "date": "25/12/*****", "mdp": "mohammedA12@", "ref": "LUI-MÊME", "tel": "0675-72-51-92", "sec": ""}, {"id": "Feuil2:1", "ns": "2360499354185", "nom": "CHILI", "pre": "OUERDIA", "date": "25/02/****", "mdp": "12Abouzid", "ref": "kouceila", "tel": "0553.42.14.22", "sec": ""}, {"id": "TOUS:31", "ns": "2440599355635", "nom": "CHILI", "pre": "OUZNA", "date": "25/07/*****", "mdp": "kouceilaA123", "ref": "B kouceila", "tel": "0553.42.14.22", "sec": ""}, {"id": "Feuil5:0", "ns": "2470191901779", "nom": "DEHBIA", "pre": "BELABDI", "date": "25/05/*****", "mdp": "actionteleA123", "ref": "RAMDANE", "tel": "0553-03-79-29", "sec": ""}, {"id": "Feuil2:5", "ns": "2431291900240", "nom": "DERMECHE", "pre": "ZAHIA", "date": "25/07/*****", "mdp": "actionteleA147", "ref": "Mohammed", "tel": "0776.09.56.15", "sec": ""}, {"id": "Feuil3:0", "ns": "1410291521012", "nom": "FADLI", "pre": "AHMED", "date": "25/03/****", "mdp": "actionteleA140", "ref": "Ami ahmed", "tel": "0557.01.54.28", "sec": ""}, {"id": "Feuil4:3", "ns": "1382091521005", "nom": "FEDDAL", "pre": "AREZKI", "date": "25/04/****", "mdp": "actionteleA258", "ref": "Lui-même", "tel": "0549-79-23-05", "sec": ""}, {"id": "Feuil2:0", "ns": "2322091900016", "nom": "FEDDAL", "pre": "DAHBIA", "date": "25/03/****", "mdp": "actionteleH2022", "ref": "Mohammed", "tel": "0558.00.87.24", "sec": ""}, {"id": "Feuil12:2", "ns": "1330891521025", "nom": "FEDDAL", "pre": "HOCINE", "date": "25/12/*****", "mdp": "actionteleA123", "ref": "BOUSSAD", "tel": "0663.29.13.05", "sec": ""}, {"id": "Feuil1:0", "ns": "2420191900604", "nom": "FEDDAL", "pre": "MOURAD", "date": "25/01/****", "mdp": "actionmouradA12", "ref": "Mourad", "tel": "0556-81-33-69", "sec": "INFO RETRAITE"}, {"id": "Feuil11:0", "ns": "2461291901182", "nom": "FEDDAL", "pre": "MOURAD", "date": "25/11/*****", "mdp": "mouradA121212", "ref": "MOURAD", "tel": "0550-18-31-15", "sec": ""}, {"id": "Feuil7:3", "ns": "2410691900996", "nom": "GHANEM", "pre": "SADIA", "date": "25/07/*****", "mdp": "matoublounesA25", "ref": "G Boussad", "tel": "0662.18.33.47", "sec": ""}, {"id": "Feuil7:7", "ns": "2250599354056", "nom": "HADJAZ", "pre": "FATMA", "date": "25/06/*****", "mdp": "actionteleA10", "ref": "SLIMANE", "tel": "0541.75.20.78", "sec": ""}, {"id": "Feuil7:8", "ns": "2520391900136", "nom": "HADJERAS", "pre": "HAMMAMA", "date": "25/07/*****", "mdp": "actionteleA456", "ref": "B Faouzi", "tel": "0561.38.77.26", "sec": ""}, {"id": "Feuil4:0", "ns": "1490299354599", "nom": "HADJERAS", "pre": "SLIMANE", "date": "25/04/****", "mdp": "actionteleA41", "ref": "HADJERAS", "tel": "0551-06-68-94", "sec": ""}, {"id": "Feuil4:2", "ns": "2500391901193", "nom": "HALAH", "pre": "DJOUHAR", "date": "25/04/****", "mdp": "matoublounesA789", "ref": "MARKFICHE", "tel": "0554-33-85-70", "sec": ""}, {"id": "Feuil7:2", "ns": "1320691521016", "nom": "HAMITOUCHE", "pre": "ALI", "date": "25/06/*****", "mdp": "hamitoucheA12@", "ref": "ROUGIE", "tel": "0776-07-71-40", "sec": ""}, {"id": "Feuil5:2", "ns": "1350991521012", "nom": "HAMMAD", "pre": "HOCINE", "date": "25/03/****", "mdp": "mohameda12@2026", "ref": "MOHAMMED", "tel": "0555.08.21.30", "sec": ""}, {"id": "Feuil1:1", "ns": "1430599353248", "nom": "HAMOUDI", "pre": "AREZKI", "date": "25/01/****", "mdp": "matoublounesA170", "ref": "Arezki", "tel": "0553-73-32-69", "sec": "INFO RETRAITE"}, {"id": "Feuil10:1", "ns": "2410794900948", "nom": "HAMOUR", "pre": "TASSADIT", "date": "25/11/*****", "mdp": "matoublounesT369", "ref": "ROUGIE", "tel": "", "sec": ""}, {"id": "Feuil3:2", "ns": "1400391521032", "nom": "HIMED", "pre": "RABAH", "date": "25/03/****", "mdp": "actionteleA123", "ref": "H.rachid", "tel": "0540.49.16.06", "sec": ""}, {"id": "Feuil7:1", "ns": "1430591521003", "nom": "LOUIZINI", "pre": "AREZKI", "date": "25/07/*****", "mdp": "actionteleA321", "ref": "Lui Même", "tel": "0658.58.86.40", "sec": ""}, {"id": "Feuil3:4", "ns": "1402091521014", "nom": "LOUZINI", "pre": "AMAR", "date": "25/03/****", "mdp": "actionteleA90", "ref": "AHMED", "tel": "0542.31.59.01", "sec": ""}, {"id": "Feuil1:2", "ns": "2420391900709", "nom": "MAHMOUDI", "pre": "MALHA", "date": "25/01/****", "mdp": "actionM20221", "ref": "Arezki", "tel": "0550-22-86-93", "sec": "INFO RETRAITE"}, {"id": "Feuil2:3", "ns": "2480691901077", "nom": "MESSAOUDI", "pre": "DJOUHER", "date": "25/02/*****", "mdp": "france@2020F", "ref": "SAID", "tel": "0549-67-84-98", "sec": ""}, {"id": "Feuil10:2", "ns": "2610699354985", "nom": "MEZAIR", "pre": "OUIZA", "date": "25/09/*****", "mdp": "matoublounesA231", "ref": "", "tel": "0558.03.71.20", "sec": ""}, {"id": "TOUS:28", "ns": "2375399352471", "nom": "MOULAHCENE", "pre": "OURDIA", "date": "25/06/*****", "mdp": "matoublounesA12", "ref": "OUHMOUCHE", "tel": "0662.97.61.79", "sec": ""}, {"id": "Feuil6:0", "ns": "2480399356898", "nom": "NADJI", "pre": "OURDIA", "date": "25/06/*****", "mdp": "matoublounesA258", "ref": "HOCINE", "tel": "0553-87-36-75", "sec": ""}, {"id": "Feuil5:5", "ns": "2381299354425", "nom": "OMOURI", "pre": "DJOUHER", "date": "25/05/*****", "mdp": "actionfaridA12@", "ref": "FARID", "tel": "0541.91.99.61", "sec": ""}, {"id": "TOUS:3", "ns": "1450191521021", "nom": "OUKLI", "pre": "SAID", "date": "25/01/****", "mdp": "actionteleA321", "ref": "Ahmed", "tel": "0551-54-55-08", "sec": ""}, {"id": "Feuil12:0", "ns": "2250199354094", "nom": "OUMEZZAOUCH", "pre": "FATMA", "date": "25/12/*****", "mdp": "actionteleA258", "ref": "", "tel": "", "sec": ""}, {"id": "Feuil10:0", "ns": "2551091900163", "nom": "OURDIA", "pre": "MOKRAOUI", "date": "25*10*20***", "mdp": "Kabyle1975*", "ref": "", "tel": "541847725", "sec": ""}, {"id": "Feuil8:0", "ns": "1430299352222", "nom": "OURRAG", "pre": "MOHAMMED", "date": "25/08/*****", "mdp": "matoublounes12AZ", "ref": "Lui Même", "tel": "0656.31.15.17", "sec": ""}, {"id": "Feuil6:2", "ns": "2501191901215", "nom": "SADIA", "pre": "HAMMAD", "date": "25/06/*****", "mdp": "France@2020@", "ref": "ABDI ALI", "tel": "0542.05.95.50", "sec": ""}, {"id": "Feuil8:2", "ns": "1470999354328", "nom": "SITAYEB", "pre": "MOHAMMED", "date": "25/08/*****", "mdp": "TirmitinE15", "ref": "Lui Même", "tel": "", "sec": ""}, {"id": "Feuil5:3", "ns": "2550791900668", "nom": "SNAOUI", "pre": "FATMA", "date": "25/05/*****", "mdp": "actionteleA147", "ref": "HAKIM NIYA", "tel": "0556.30.21.01", "sec": ""}, {"id": "Feuil1:3", "ns": "2460991901136", "nom": "SOUAMI", "pre": "TASSADIT", "date": "25/01/****", "mdp": "tassaditA12@", "ref": "MOHAMED", "tel": "0771-48-66-96", "sec": "ASSURANCE"}, {"id": "Feuil1:4", "ns": "1400291521031", "nom": "SOUICI", "pre": "RABAH", "date": "25/01/****", "mdp": "actionteleA789", "ref": "Rabah", "tel": "0793-08-06-83", "sec": "INFO RETRAITE"}, {"id": "Feuil3:3", "ns": "1470999355198", "nom": "TAIB", "pre": "BOUSSAD", "date": "25/03/****", "mdp": "actionteleA13", "ref": "TIFICHAUD", "tel": "0549-22-90-82", "sec": ""}, {"id": "TOUS:44", "ns": "1401291521029", "nom": "TAIB", "pre": "MOHAMMED", "date": "25/11/*****", "mdp": "matoublounesA123", "ref": "", "tel": "", "sec": ""}, {"id": "Feuil12:1", "ns": "2340499354088", "nom": "TAIBI", "pre": "HAMMAMA", "date": "25/12/*****", "mdp": "actionteleA159", "ref": "ALI", "tel": "0561.83.60.16", "sec": ""}, {"id": "Feuil4:4", "ns": "1410699352094", "nom": "TAIBI", "pre": "SALAH", "date": "25/04/****", "mdp": "actionteleA45", "ref": "Lui-même", "tel": "0553-96-75-08", "sec": ""}], SECS=[['INFO RETRAITE','📄'],['ASSURANCE','🛡️'],['ARCO','📁'],['','❔']];
+var KEY='wnc_sections_v2', over={};
+try{over=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+var ed={},EK='wnc_edits_v1',editing=null,FL=[['nom','Nom'],['pre','Prénom'],['date','Date (JJ/MM/AAAA)'],['ns','N° Sécurité sociale'],['mdp','Mot de passe'],['ref','Nom complémentaire'],['tel','Téléphone'],['email','E-mail']];
+try{ed=JSON.parse(localStorage.getItem(EK)||'{}')}catch(e){}
+var AD=[],ADK='wnc_added_v1';try{AD=JSON.parse(localStorage.getItem(ADK)||'[]')}catch(e){}
+AD.forEach(function(p){DATA.push(p)});
+DATA.forEach(function(p){p.email=p.email||'';var e=ed[p.id];if(e)for(var k in e)p[k]=e[k];if(over[p.id]!==undefined)p.sec=over[p.id]});
+var MN=['','Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],mf=-1;
+function mo(p){var m=parseInt((p.date||'').substr(3,2),10);return m>=1&&m<=12?m:0}
+function dy(p){return parseInt((p.date||'').substr(0,2),10)||0}
+var app=document.getElementById('app'),tt,shown={};
+function toast(m){var t=document.getElementById('t');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('on')},1300)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+var TRI='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/></svg>';
+var curSec=null,DK='wnc_deleted_v1',dl=[];
+try{dl=JSON.parse(localStorage.getItem(DK)||'[]')}catch(e){}
+DATA=DATA.filter(function(p){return dl.indexOf(p.id)<0});
+function redraw(){if(document.getElementById('l'))draw(curSec,document.getElementById('q').value)}
+function confirmDel(p){var o=document.createElement('div');o.className='ov';
+  o.innerHTML='<div class="card" style="max-width:340px;text-align:center"><div class="nm" style="text-align:center">'+esc(p.nom+' '+p.pre)+'</div><div style="margin-top:8px;font-size:14px">Supprimer cette fiche ?</div><div class="acts" style="justify-content:center"><button class="mini" data-a="y" style="background:#c0392b">Supprimer</button><button class="mini ok" data-a="n">Annuler</button></div></div>';
+  o.onclick=function(e){var a=e.target.dataset&&e.target.dataset.a;if(!a)return;document.body.removeChild(o);
+    if(a==='y'){dl.push(p.id);try{localStorage.setItem(DK,JSON.stringify(dl))}catch(x){}DATA=DATA.filter(function(q){return q!==p});toast('Supprimé');redraw()}};
+  document.body.appendChild(o)}
+var AK='wnc_alarm_v1',AS={on:true,done:''};
+try{AS=Object.assign(AS,JSON.parse(localStorage.getItem(AK)||'{}'))}catch(e){}
+function asave(){try{localStorage.setItem(AK,JSON.stringify(AS))}catch(e){}}
+function tds(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function due(){var d=new Date().getDate();return AS.on&&(d===1||d===22)&&AS.done!==tds()}
+function nextAl(){var n=new Date(),y=n.getFullYear(),m=n.getMonth(),t=new Date(y,m,n.getDate()),c=[new Date(y,m,1),new Date(y,m,22),new Date(y,m+1,1)];
+  for(var i=0;i<c.length;i++)if(c[i]>=t)return c[i];return c[2]}
+function pad(x){return (x<10?'0':'')+x}
+var ctx=null,rt=null;
+function beep(){try{var o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=880;g.gain.value=.25;o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.35);if(navigator.vibrate)navigator.vibrate(300)}catch(e){}}
+function startRing(){if(rt)return;try{ctx=new (window.AudioContext||window.webkitAudioContext)();
+  var go=function(){if(ctx.state==='suspended')ctx.resume()};go();document.addEventListener('pointerdown',go,{once:true});
+  rt=setInterval(beep,1000);setTimeout(stopRing,60000)}catch(e){}}
+function stopRing(){clearInterval(rt);rt=null;try{ctx&&ctx.close()}catch(e){}ctx=null}
+function alarmHtml(){
+  if(due())return '<div class="alarm"><span>🔔 Rappel : aujourd’hui le '+new Date().getDate()+'</span><button id="alx">Arrêter</button></div>';
+  var n=nextAl();
+  return '<div class="nx"><span>'+(AS.on?'🔔 Prochain rappel : '+pad(n.getDate())+'/'+pad(n.getMonth()+1)+'/'+n.getFullYear():'🔕 Rappels désactivés')+' (1 et 22)</span><button id="alt">'+(AS.on?'Désactiver':'Activer')+'</button></div>'}
+function alarmBind(){var x=document.getElementById('alx'),t=document.getElementById('alt');
+  if(x)x.onclick=function(){stopRing();AS.done=tds();asave();home()};
+  if(t)t.onclick=function(){AS.on=!AS.on;asave();if(AS.on&&due())startRing();home()}}
+if(due())startRing();
+setInterval(function(){if(due()&&!rt&&document.getElementById('alx')===null&&document.querySelector('h1')){startRing();home()}},60000);
+function addForm(def){var o=document.createElement('div');o.className='ov';
+  o.innerHTML='<div class="card fm"><h3>➕ Nouvelle personne</h3>'+FL.map(function(f){return '<label class="f">'+f[1]+'<input data-k="'+f[0]+'"'+(f[0]==='email'?' type="email" dir="ltr"':'')+'></label>'}).join('')
+    +'<label class="f">Section<select id="asec">'+SECS.map(function(x){return '<option value="'+x[0]+'"'+(x[0]===def?' selected':'')+'>'+(x[0]||'Non classé')+'</option>'}).join('')+'</select></label>'
+    +'<div class="acts"><button class="mini ok" data-a="y">Ajouter</button><button class="mini" data-a="n">Annuler</button></div></div>';
+  o.onclick=function(e){var a=e.target.dataset&&e.target.dataset.a;if(!a)return;
+    if(a==='n'){document.body.removeChild(o);return}
+    var n={id:'add:'+Date.now(),ns:'',nom:'',pre:'',date:'',mdp:'',ref:'',tel:'',email:'',sec:o.querySelector('#asec').value};
+    o.querySelectorAll('input[data-k]').forEach(function(x){n[x.dataset.k]=x.value.trim()});
+    if(!n.nom&&!n.pre){toast('Nom ou prénom requis');return}
+    document.body.removeChild(o);DATA.push(n);AD.push(n);
+    try{localStorage.setItem(ADK,JSON.stringify(AD))}catch(x){}
+    mf=-1;toast('Ajouté');if(document.getElementById('l'))redraw();else home()};
+  document.body.appendChild(o)}
+function home(){
+  var h='<h1>WNC MENACERA</h1>'+alarmHtml();
+  SECS.slice(0,3).forEach(function(s){var n=DATA.filter(function(p){return p.sec===s[0]}).length;
+    h+='<button class="btn" data-s="'+s[0]+'"><span class="ico">'+s[1]+'</span><span class="lbl">'+s[0]+'</span><span class="cnt">'+n+'</span></button>'});
+  var u=DATA.filter(function(p){return !p.sec}).length;
+  if(u)h+='<button class="btn small" data-s="">❔ Non classé ('+u+')</button>';
+  h+='<button class="btn small" id="addp">➕ Ajouter une personne</button>';
+  app.innerHTML=h;
+  app.querySelectorAll('.btn[data-s]').forEach(function(b){b.onclick=function(){list(b.dataset.s,'')}});
+  document.getElementById('addp').onclick=function(){addForm('')};
+  alarmBind();
+}
+function list(sec,q){
+  mf=-1;editing=null;curSec=sec;
+  var name=sec||'Non classé';
+  var h='<div class="top"><button class="back" id="bk">← Retour</button><h2>'+name+'</h2><button class="back" id="ad" style="margin-inline-start:auto">➕ Ajouter</button></div><input class="s" id="q" placeholder="Rechercher un nom ou un téléphone" value="'+esc(q)+'"><div class="chips" id="ch"></div><div id="l"></div>';
+  app.innerHTML=h;
+  document.getElementById('bk').onclick=home;
+  document.getElementById('ad').onclick=function(){addForm(sec)};
+  var qi=document.getElementById('q');qi.oninput=function(){draw(sec,qi.value)};
+  draw(sec,q);
+}
+function draw(sec,q){
+  q=q.trim().toLowerCase();
+  var base=DATA.filter(function(p){return p.sec===sec&&(!q||(p.nom+' '+p.pre+' '+p.tel+' '+p.ref).toLowerCase().indexOf(q)>=0)});
+  var have={};base.forEach(function(p){have[mo(p)]=1});
+  var ch=document.getElementById('ch'),cs='<button class="chip'+(mf===-1?' on':'')+'" data-f="-1">Tous</button>';
+  for(var m=1;m<=12;m++)if(have[m])cs+='<button class="chip'+(mf===m?' on':'')+'" data-f="'+m+'">'+MN[m]+'</button>';
+  if(have[0])cs+='<button class="chip'+(mf===0?' on':'')+'" data-f="0">Sans date</button>';
+  ch.innerHTML=cs;
+  ch.querySelectorAll('.chip').forEach(function(c){c.onclick=function(){mf=parseInt(c.dataset.f);draw(sec,document.getElementById('q').value)}});
+  var items=mf>=0?base.filter(function(p){return mo(p)===mf}):base.slice();
+  items.sort(function(a,b){return (mo(a)||99)-(mo(b)||99)||dy(a)-dy(b)});
+  var l=document.getElementById('l');
+  if(!items.length){l.innerHTML='<div class="empty">Aucun résultat</div>';return}
+  var last=-1,cnt={};items.forEach(function(p){cnt[mo(p)]=(cnt[mo(p)]||0)+1});
+  l.innerHTML=items.map(function(p){
+    var hd='';if(mo(p)!==last){last=mo(p);hd='<div class="mh">'+(last?MN[last]:'Sans date')+'<span>'+cnt[last]+'</span></div>'}
+    return hd+cardHtml(p)}).join('');
+  bind(l,sec);
+}
+function cardHtml(p){
+  {
+    var i=DATA.indexOf(p),tel=p.tel.replace(/[^0-9+]/g,'');
+    if(editing===p.id)return '<div class="card">'+FL.map(function(f){return '<label class="f">'+f[1]+'<input data-k="'+f[0]+'" value="'+esc(p[f[0]])+'"'+(f[0]==='email'?' type="email" dir="ltr"':'')+'></label>'}).join('')+'<div class="acts"><button class="mini ok" data-sv="'+i+'">Enregistrer</button><button class="mini" data-cx="1">Annuler</button></div></div>';
+    return '<div class="card"><div class="hd"><div class="nm">'+esc(p.nom+' '+p.pre)+'</div><div class="hb"><button class="sc" data-del="'+i+'" aria-label="Supprimer">'+TRI+'</button><button class="mini" data-e="'+i+'">Modifier</button></div></div>'
+    +(p.ref?'<div class="row"><span>Nom complémentaire</span><span>'+esc(p.ref)+'</span></div>':'')
+    +'<div class="row"><span>E-mail</span>'+(p.email?'<a class="v" href="mailto:'+esc(p.email)+'">'+esc(p.email)+'</a>':'<span class="v">—</span>')+'</div>'
+    +(tel?'<div class="row"><span>Téléphone</span><a class="v" href="tel:'+tel+'">'+esc(p.tel)+'</a></div>':'')
+    +'<div class="row"><span>N° Sécurité sociale</span><span class="v" data-h="'+i+'n">••••••••</span><button class="mini" data-r="'+i+'n">Afficher</button></div>'
+    +'<div class="row"><span>Mot de passe</span><span class="v" data-h="'+i+'m">••••••••</span><button class="mini" data-r="'+i+'m">Afficher</button><button class="mini" data-c="'+i+'">Copier</button></div>'
+    +'<div class="row"><span>Section</span><select data-m="'+i+'">'+SECS.map(function(s){return '<option value="'+s[0]+'"'+(s[0]===p.sec?' selected':'')+'>'+(s[0]||'Non classé')+'</option>'}).join('')+'</select></div></div>'}}
+function bind(l,sec){
+  l.querySelectorAll('[data-del]').forEach(function(b){b.onclick=function(){confirmDel(DATA[b.dataset.del])}});
+  var q=function(){return document.getElementById('q').value};
+  l.querySelectorAll('[data-e]').forEach(function(b){b.onclick=function(){editing=DATA[b.dataset.e].id;draw(sec,q())}});
+  l.querySelectorAll('[data-cx]').forEach(function(b){b.onclick=function(){editing=null;draw(sec,q())}});
+  l.querySelectorAll('[data-sv]').forEach(function(b){b.onclick=function(){
+    var p=DATA[b.dataset.sv],e={};
+    l.querySelectorAll('input[data-k]').forEach(function(x){p[x.dataset.k]=x.value.trim();e[x.dataset.k]=p[x.dataset.k]});
+    ed[p.id]=e;try{localStorage.setItem(EK,JSON.stringify(ed))}catch(x){}
+    editing=null;toast('Enregistré');draw(sec,q())}});
+  l.querySelectorAll('[data-r]').forEach(function(b){b.onclick=function(){
+    var k=b.dataset.r,i=parseInt(k),el=l.querySelector('[data-h="'+k+'"]'),on=b.textContent==='Afficher';
+    el.textContent=on?(k.slice(-1)==='n'?DATA[i].ns:DATA[i].mdp):'••••••••';b.textContent=on?'Masquer':'Afficher'}});
+  l.querySelectorAll('[data-c]').forEach(function(b){b.onclick=function(){
+    var v=DATA[b.dataset.c].mdp;
+    (navigator.clipboard?navigator.clipboard.writeText(v):Promise.reject()).then(function(){toast('Copié')},function(){toast('Copie impossible')})}});
+  l.querySelectorAll('[data-m]').forEach(function(s){s.onchange=function(){
+    var p=DATA[s.dataset.m];p.sec=s.value;over[p.id]=s.value;
+    try{localStorage.setItem(KEY,JSON.stringify(over))}catch(e){}
+    toast('Déplacé');draw(sec,document.getElementById('q').value)}});
+}
+home();
+</script>
+</body>
+</html>
